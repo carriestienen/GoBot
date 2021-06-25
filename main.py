@@ -81,11 +81,18 @@ def determine_politeness(sentence):
     else:
         return "cannot determine"
 
+def convert_past_tense(sen):
+    sen = sen.replace("ました", "ます")
+    sen = sen.replace("でした", "です")
+    return sen
+
 def process_input():
     sen = input("Please enter sentence in Japanese:")
     sen = sen.translate(str.maketrans('', '', string.punctuation + japanese_punction))
     if (sen[-1:] in unnecessary_endings):
         sen = sen[:-1]
+
+    sen = convert_past_tense(sen)
     return sen
 
 def get_output(sentence):
